@@ -1,0 +1,31 @@
+body {
+  width: 80%;
+  margin: auto;
+  padding: 0;
+  font-family: system-ui;
+}
+
+.traffic-info-table {
+  width: 100%;
+  text-align: center;
+  border: 1px solid #CCC;
+}
+
+.traffic-info-table thead {
+  background: #002CFFBB;
+  color: white;
+}
+
+.traffic-info-table tbody > tr:nth-child(even) {
+  background: #CCC;
+}
+
+.traffic-info-table tbody > tr:nth-child(odd) {
+  background: #FFF;
+}
+
+.traffic-info-table th,
+.traffic-info-table td {
+  padding: 8px;
+}
+
