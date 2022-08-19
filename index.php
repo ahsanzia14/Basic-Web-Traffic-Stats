@@ -32,14 +32,15 @@ if ($db->execute()) {
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="./styles.css">
-	
+
 	<title>Web Traffic</title>
 
 	<script src="https://releases.jquery.com/git/jquery-git.min.js" type="application/javascript"></script>
 </head>
 
 <body>
-	<h1>Visitor's Information</h1>
+	<h1>Web Traffic Logger</h1>
+	<p>Click <a href="/traffic-info.php">here</a> to view basic info about website visitor.</p>
 </body>
 
 </html>
@@ -55,6 +56,47 @@ if ($db->execute()) {
 		// lets send ajax post request 
 		$.post("/ajax.php", screenSize, function(data) {
 			console.log(data);
+		});
+
+		const interval = 3 // 3 seconds
+		let timeSpent = 0; // initial time spent
+		// lets start time interval
+		let intervalId = setInterval(stillHere, interval * 1000);
+
+		/**
+		 * send get request with time spent
+		 */
+		function stillHere() {
+			timeSpent += interval;
+			$.get("/ajax.php", {
+				time_spent: timeSpent
+			}, function(data) {
+				console.log(data);
+			});
+		}
+
+		document.addEventListener("visibilitychange", (e) => {
+			if (document.visibilityState === 'visible') {
+				if (!intervalId)
+					intervalId = setInterval(stillHere, interval * 1000);
+			} else {
+				clearInterval(intervalId);
+				intervalId = 0;
+			}
+		});
+
+		/* $(window).on('focus', function() {
+			if (!intervalId)
+				intervalId = setInterval(stillHere, interval * 1000);
+		});
+
+		$(window).on('blur', function() {
+			clearInterval(intervalId);
+			intervalId = 0;
+		}); */
+
+		$(window).on('unload', function(e) {
+			clearInterval(intervalId);
 		});
 	});
 </script>

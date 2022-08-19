@@ -16,17 +16,17 @@ $trafficInfo = $db->resultSet();
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="./styles.css">
-  
+
   <title>Web Traffic</title>
-  
+
   <script src="https://releases.jquery.com/git/jquery-git.min.js" type="application/javascript"></script>
 </head>
 
 <body>
   <h1>Web Traffic Information</h1>
-  
+
   <div class="traffic-info-section">
-    <table class="traffic-info-table"> 
+    <table class="traffic-info-table">
       <thead>
         <tr>
           <th>#ID</th>
@@ -34,6 +34,7 @@ $trafficInfo = $db->resultSet();
           <th>Screen Size</th>
           <th>Visited URL</th>
           <th>Visited At</th>
+          <th>Time Spent</th>
         </tr>
       </thead>
       <tbody>
@@ -44,6 +45,7 @@ $trafficInfo = $db->resultSet();
             <td><?= $traffic->screen_size ?></td>
             <td><?= urldecode($traffic->visited_url) ?></td>
             <td><?= setDateFormat($traffic->visited_at) ?></td>
+            <td><?= floor($traffic->time_spent / 60) . ' Min ' . ($traffic->time_spent % 60) . ' Sec' ?></td>
           </tr>
         <?php endforeach ?>
       </tbody>
