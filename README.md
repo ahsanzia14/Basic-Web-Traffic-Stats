@@ -1,4 +1,6 @@
-It is simple script for storing basic stats about website visitor.
+# About
+
+It is simple script for storing basic stats/info about website visitor.
 
 # index.php
 
